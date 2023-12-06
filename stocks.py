@@ -58,7 +58,7 @@ def display_anomalies(anomalies_data):
             print(f"Date: {row['Date']}, Close: {row['Close']}, Price Change: {round(row['Price_Change'],2)}%, RSI: {row['RSI']}, MACD: {row['MACD']}")
 
 
-def learning_center(user_stock, user_chosen_start_date):
+def stock_anomalies_detection(user_stock, user_chosen_start_date):
     start_date = user_chosen_start_date - timedelta(days=365)
     end_date = user_chosen_start_date - timedelta(days=1)
     formatted_start_date = start_date.strftime('%Y-%m-%d')
@@ -114,13 +114,8 @@ def learning_center(user_stock, user_chosen_start_date):
     display_anomalies(anomalies_detected)
 
 
-def main():
-    # 1. Data Changes
-    # 2. Anomaly Detection
-    # 3. Model Training and Evaluation
-
-    user_stock = 'STLA' # input("Enter the stock ticker: ")
-
+def get():
+    """
     end_date = datetime.now()
     start_date = end_date - timedelta(days=7)
     formatted_start_date = start_date.strftime('%Y-%m-%d')
@@ -130,13 +125,24 @@ def main():
     sp500_data = fetch_stock_data('^GSPC', formatted_start_date, formatted_end_date, interval='1d')
     print(user_stock_data)
     print(sp500_data)
-    if base_filter(user_stock_data, sp500_data, user_stock):
-        # Does not follow the market trend
+    if base_filter(user_stock_data, sp500_data, user_stock) and learning_center(user_stock, datetime.now()):
+        # Double-confirmed to not follow the market trend
         pass
     else:
         # Follows the market trend
         pass
-    learning_center(user_stock, datetime.now())
+    :return:
+    """
+    pass
+
+
+def main():
+    # 1. Data Changes
+    # 2. Anomaly Detection
+    # 3. Model Training and Evaluation
+    user_stock = 'STLA' # input("Enter the stock ticker: ")
+
+    stock_anomalies_detection(user_stock, datetime.now())
 
 
 if __name__ == "__main__":
